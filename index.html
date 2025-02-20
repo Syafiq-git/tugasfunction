@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi JavaScript dalam Card</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        p {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .ktp-card {
+            position: relative;
+            width: 320px;
+            height: 200px;
+            margin: 0 auto;
+            background-image: url(Template-KTP-Kosong.jpg);
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            padding: 15px;
+            color: #000;
+            font-size: 12px;
+        }
+        
+        .ktp-info {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            line-height: 1.4;
+            margin-top: -1rem;
+            margin-left: 2.7rem;
+        }
+        
+        .ktp-info p {
+            background: transparent;
+            margin: 2px 0;
+            text-align: left;
+            margin-bottom: -1.5rem;
+        }
+        
+        .ktp-input {
+            margin-top: 10px;
+        }
+        
+        .photo-container {
+            position: absolute;
+            top: 35px;
+            right: 10px;
+            width: 80px;
+            height: 100px;
+            border: 1px solid #000;
+            overflow: hidden;
+            cursor: grab;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1 style="text-align: center;">tugas dengan function</h1>
+    <div class="container">
+        <!-- Hitung Diskon -->
+        <div class="card">
+            <h2>hitung Diskon</h2>
+            <label for="harga">Harga Barang (Rp):</label>
+            <input type="number" id="harga" value="100000">
+
+            <label for="diskon">Diskon (%):</label>
+            <input type="number" id="diskon" value="20">
+
+            <button onclick="hitungDiskon()">Hitung Diskon</button>
+            <p id="hasilDiskon"></p>
+        </div>
+
+        <!-- Konversi Suhu -->
+        <div class="card">
+            <h2>Konversi Suhu</h2>
+            <label for="suhu">Masukkan Suhu:</label>
+            <input type="number" id="suhu" value="25">
+
+            <label for="suhuFrom">Konversi Dari:</label>
+            <select id="suhuFrom">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+                <option value="R">Reaumur</option>
+                <option value="K">Kelvin</option>
+            </select>
+
+            <label for="suhuTo">Konversi Ke:</label>
+            <select id="suhuTo">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+                <option value="R">Reaumur</option>
+                <option value="K">Kelvin</option>
+            </select>
+
+            <button onclick="konversiSuhu()">Konversi > lihat hasilnya</button>
+            <p id="hasilSuhu"></p>
+        </div>
+
+        <!-- Kalkulator -->
+        <div class="card">
+            <h2>Kalkulator</h2>
+            <label for="angka1">Angka 1:</label>
+            <input type="number" id="angka1" value="10">
+
+            <label for="angka2">Angka 2:</label>
+            <input type="number" id="angka2" value="5">
+
+            <label for="operator">simbol hanya bisa : +, -, *, /:</label>
+            <input type="text" id="operator" value="+">
+
+            <button onclick="kalkulator()">Hitung</button>
+            <p id="hasilKalkulator"></p>
+        </div>
+
+        <!-- Data KTP -->
+        <div class="card">
+            <h2>Data KTP</h2>
+            <div class="ktp-input">
+                <label for="nik">NIK:</label>
+                <input type="text" id="nik" placeholder="Masukkan NIK">
+
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" placeholder="Masukkan Nama">
+
+                <label for="usia">Tempat/Tgl Lahir:</label>
+                <input type="text" id="usia" placeholder="Masukkan Tempat/Tgl Lahir">
+
+                <label for="alamat">Alamat:</label>
+                <input type="text" id="alamat" placeholder="Masukkan Alamat">
+
+
+                <label for="foto">Upload Foto wajah anda:</label>
+                <input type="file" id="foto" accept="image/*" onchange="uploadFoto(event)">
+
+
+                <button onclick="tampilkanKTP()">Tampilkan KTP anda</button>
+                <div id="ktp" class="ktp-card" style="display:none;">
+                    <div class="ktp-info" id="ktpInfo"></div>
+                    <div class="photo-container" id="photoContainer" onmousedown="startDrag(event)" onmouseup="stopDrag()" onmousemove="drag(event)">
+                        <img id="photo" src="" alt="Foto KTP">
+                    </div>
+                </div>
+            </div>
+
+            <div id="ktp" class="ktp-card" style="display:none;">
+                <div class="ktp-info" id="ktpInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hitungDiskon() {
+            let harga = parseFloat(document.getElementById('harga').value);
+            let diskon = parseFloat(document.getElementById('diskon').value);
+            let jumlahDiskon = harga * (diskon / 100);
+            let totalBayar = harga - jumlahDiskon;
+            document.getElementById('hasilDiskon').innerHTML =
+                `Diskon: Rp ${jumlahDiskon.toLocaleString()}<br>Total Bayar: Rp ${totalBayar.toLocaleString()}`;
+        }
+
+        function konversiSuhu() {
+            let suhu = parseFloat(document.getElementById('suhu').value);
+            let fromUnit = document.getElementById('suhuFrom').value;
+            let toUnit = document.getElementById('suhuTo').value;
+            let hasil;
+
+            if (fromUnit === 'C') hasil = toUnit === 'F' ? (suhu * 9 / 5) + 32 : toUnit === 'R' ? suhu * 4 / 5 : suhu + 273.15;
+            else if (fromUnit === 'F') hasil = toUnit === 'C' ? (suhu - 32) * 5 / 9 : toUnit === 'R' ? (suhu - 32) * 4 / 9 : (suhu - 32) * 5 / 9 + 273.15;
+            else if (fromUnit === 'R') hasil = toUnit === 'C' ? suhu * 5 / 4 : toUnit === 'F' ? (suhu * 9 / 4) + 32 : (suhu * 5 / 4) + 273.15;
+            else if (fromUnit === 'K') hasil = toUnit === 'C' ? suhu - 273.15 : toUnit === 'F' ? (suhu - 273.15) * 9 / 5 + 32 : (suhu - 273.15) * 4 / 5;
+
+            document.getElementById('hasilSuhu').innerHTML = `Hasil: ${hasil.toFixed(2)}° ${toUnit}`;
+        }
+
+        function kalkulator() {
+            let angka1 = parseFloat(document.getElementById('angka1').value);
+            let angka2 = parseFloat(document.getElementById('angka2').value);
+            let operator = document.getElementById('operator').value;
+            let hasil = operator === '+' ? angka1 + angka2 : operator === '-' ? angka1 - angka2 : operator === '*' ? angka1 * angka2 : angka2 !== 0 ? angka1 / angka2 : 'Tidak bisa dibagi nol!';
+            document.getElementById('hasilKalkulator').innerHTML = `Hasil: ${hasil}`;
+        }
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        function uploadFoto(event) {
+            const photo = document.getElementById('photo');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photo.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function tampilkanKTP() {
+            const nik = document.getElementById('nik').value;
+            const nama = document.getElementById('nama').value;
+            const usia = document.getElementById('usia').value;
+            const alamat = document.getElementById('alamat').value;
+            const ktpDiv = document.getElementById('ktp');
+            const ktpInfo = document.getElementById('ktpInfo');
+
+            ktpInfo.innerHTML = `
+                <p><strong>:</strong> ${nik}</p>
+                <p><strong>:</strong> ${nama}</p>
+                <p><strong>:</strong> ${usia}</p>
+                <p><strong>:</strong> ${alamat}</p>
+            `;
+
+            ktpDiv.style.display = 'block';
+        }
+
+        function startDrag(event) {
+            isDragging = true;
+            const rect = event.target.parentElement.getBoundingClientRect();
+            offsetX = event.clientX - rect.left;
+            offsetY = event.clientY - rect.top;
+        }
+
+        function stopDrag() {
+            isDragging = false;
+        }
+
+        function drag(event) {
+            if (isDragging) {
+                const container = document.getElementById('photoContainer');
+                const parent = container.parentElement;
+                const parentRect = parent.getBoundingClientRect();
+                const newX = event.clientX - parentRect.left - offsetX;
+                const newY = event.clientY - parentRect.top - offsetY;
+
+                container.style.left = `${Math.max(0, Math.min(parent.offsetWidth - container.offsetWidth, newX))}px`;
+                container.style.top = `${Math.max(0, Math.min(parent.offsetHeight - container.offsetHeight, newY))}px`;
+            }
+        }
+    </script>
+    <script src="selamat.js"></script>
+</body>
+
+</html>
